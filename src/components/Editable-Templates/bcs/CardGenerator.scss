@@ -1,0 +1,438 @@
+$base-font-size: 12px;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
+
+
+.showForm,
+.hideForm {
+    position: fixed;
+    top: 3vw;
+    right: 3vw;
+    color: #253747;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: fit-content;
+    display: grid;
+    place-items: center;
+
+    &.hidden {
+        display: none;
+    }
+
+    &:hover {
+        color: #25374780;
+        box-shadow: 0px 0 5px 2px #253747;
+    }
+
+    .icon {
+        vertical-align: middle;
+    }
+}
+
+.hideForm {
+    border-radius: 50%;
+}
+
+.Front.card-front-form {
+    // visibility: collapse;
+
+}
+
+.Back.card-back-form {
+    // visibility: collapse;
+
+}
+
+.Front.front-view {
+    // visibility: collapse;
+}
+
+.Back.back-view {
+    // visibility: collapse;
+}
+
+.Front.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.remove-button {
+    font-size: 1vh;
+    margin-left: 1vw;
+}
+
+.Container {
+    font-family: 'Open Sans', sans-serif;
+    color: #4c7093;
+    height: 100%;
+
+    .split {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+    }
+
+    .whole {
+        display: grid;
+        place-items: center;
+    }
+
+    .formSection {
+        .form {
+            &.form-hidden {
+                display: none;
+            }
+        }
+    }
+
+    .preview {
+        padding: 0 3vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: inherit;
+        flex-direction: column;
+        gap: 3vh;
+
+        .template-background {
+            background: white;
+            background-repeat: no-repeat;
+            background-size: cover;
+            box-sizing: border-box;
+            box-shadow: 5px 8px 15px 1px #000000c0;
+            height: calc((500px*4)/7);
+            width: 500px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            p {
+                margin: 0;
+            }
+
+            .name-title-div {
+                .name {
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    font-size: 1.3rem;
+                    line-height: 2rem;
+                    letter-spacing: 1px;
+                }
+
+                .title {
+                    font-size: 1rem;
+                    line-height: 1rem;
+                }
+
+                hr {
+                    margin: 15px 0;
+                    height: 1px;
+                    background-color: #253747;
+                    opacity: .5;
+                    border: none;
+                }
+
+                .second {
+                    margin-bottom: 10px;
+                }
+            }
+
+            .info-div {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                line-height: normal;
+
+                .contact-div {
+                    p {
+                        font-size: .75rem;
+                        margin: 0;
+                    }
+
+                    .number {}
+
+                    .email {
+                        margin-bottom: 5px;
+                    }
+
+                    .website {}
+
+                    .company {
+                        img {
+                            width: 5rem;
+                            height: auto;
+                            font-size: 7px;
+                            margin-top: 10px;
+                        }
+                    }
+                }
+
+                .address-div {
+                    .address {
+                        font-size: .75rem;
+                        margin: 0;
+                    }
+                }
+            }
+
+        }
+
+        .back-view {
+            // display: flex;
+            // flex-direction: column;
+            // justify-content: center;
+            // align-items: center;
+            gap: 3%;
+
+            .back-logo {
+                max-height: 40%;
+            }
+
+            .company-name {
+                letter-spacing: 1px;
+            }
+        }
+
+        .button-div {
+            position: absolute;
+            top: 2vh;
+            right: 2vh;
+            display: flex;
+            gap: 1vh;
+
+            button {
+                font-size: 1.5vh;
+                padding: 1vh;
+            }
+        }
+
+    }
+}
+
+
+//MEDIA QUERIES
+
+@media screen and (min-width: 850px) {
+    .split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: 100vh;
+
+        .formSection {
+            height: 100vh;
+            padding: 0;
+            display: grid;
+            place-items: center;
+
+            .form {
+                .form-title {
+                    h1 {
+                        margin: 0;
+                        line-height: 4vh;
+                        font-size: 2rem;
+                        font-weight: bold;
+                    }
+                }
+
+
+                Form {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    padding-top: 2rem;
+
+                    #form-group {
+                        margin-bottom: 3px;
+
+                        .form-control {
+                            width: 85%;
+                            padding: 1vh;
+                            border: none;
+                            border-radius: 5px;
+                            transition: box-shadow 0.2s ease-in-out;
+                            background: none;
+                            box-shadow: 0 8px 5px -3px #fdfdfd;
+                            color: #253747;
+                            font-weight: 600;
+                            letter-spacing: 1px;
+                            border-color: #4c7093;
+                            outline: none;
+                            box-shadow: 0 8px 20px -3px #4c7093;
+
+                           &:hover {
+                                scale: (1.1);
+                                box-shadow: 0 8px 20px -3px #4c7093;
+                            }
+                        }
+                    }
+
+
+                }
+            }
+        }
+
+    }
+
+    .hideForm {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .Container {
+        .formSection {
+            height: 60vh;
+
+            .form {
+                background-color: #c8d5e2;
+                padding: 0 5vw;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                height: 100%;
+
+                .button {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                }
+
+                .form-title {
+                    h1 {
+                        line-height: 4vh;
+                        font-size: 2rem;
+                        font-weight: bold;
+                    }
+                }
+
+
+                Form {
+                    position: relative;
+                    width: 100%;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    place-items: center;
+                    gap: 1vw 5vw;
+
+                    .form-control {
+                        width: 85%;
+                        padding: 1vh;
+                        border: none;
+                        border-radius: 5px;
+                        transition: box-shadow 0.2s ease-in-out;
+                        background: none;
+                        box-shadow: 0 8px 5px -3px #fdfdfd;
+                        color: #253747;
+                        font-weight: 600;
+                        letter-spacing: 1px;
+
+                        &:focus {
+                            border-color: #4c7093;
+                            outline: none;
+                            box-shadow: 0 8px 20px -3px #4c7093;
+                        }
+
+                        &:hover {
+                            scale: (1.1);
+                            box-shadow: 0 8px 20px -3px #4c7093;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .whole {
+        grid-template-rows: 1fr;
+
+        .formSection {
+            visibility: hidden;
+            height: 0;
+        }
+
+        .showForm {
+            visibility: visible;
+        }
+
+        .preview {
+            padding: 0 4vw;
+        }
+    }
+
+    .split {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 2fr;
+
+        .formSection {
+            p {
+                margin: 3px;
+            }
+
+            .form {
+                Form {
+                    .form-control {
+                        font-size: 1.5vh;
+                    }
+                }
+            }
+        }
+
+        .preview {
+            position: relative;
+            overflow: hidden;
+
+            .template-background {
+                width: 300px;
+                height: calc((300px*4)/7);
+                padding: calc(2rem/100 * 70);
+                box-shadow: 2.5px 4px 7.5px .5px #000000c0;
+
+                .name-title-div {
+                    .name {
+                        font-size: calc(1.3rem/100 * 60);
+                        line-height: calc(1rem/100 * 60);
+                    }
+
+                    .title {
+                        font-size: calc(1rem/100 * 60);
+                        line-height: calc(1rem/100 * 60);
+                    }
+
+                    hr {
+                        margin: calc(15px/100 * 60) 0;
+                    }
+
+                    .second {
+                        margin-bottom: calc(10px/100 * 60);
+                    }
+                }
+
+                .info-div {
+                    line-height: calc(25px/100 * 60);
+
+                    .contact-div {
+                        p {
+                            font-size: calc(0.75rem/100 * 60);
+                        }
+
+                        .email {
+                            margin-bottom: calc(10px/100 * 60);
+                        }
+
+                        .company {
+                            img {
+                                width: calc(5rem/100 * 60);
+                                margin-top: calc(10px/100 * 60);
+                            }
+                        }
+                    }
+
+                    .address-div {
+                        .address {
+                            font-size: calc(0.75rem/100 * 60);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
