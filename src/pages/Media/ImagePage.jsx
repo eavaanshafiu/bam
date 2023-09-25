@@ -1,10 +1,11 @@
 import React from 'react'
 import Layout from '../../Layout.';
- 
+import FileUploader from '../../components/FileUploader';
+
 function ImagePage() {
     return (
         <Layout>
-            <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+            {/* <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
 
                 <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
                     <div>
@@ -560,7 +561,22 @@ function ImagePage() {
                         </div>
                     </div>
                 </div>
+            </div> */}
+
+            <FileUploader />
+
+            <section className='grid md:grid-cols-3 justify-center gap-4 mt-10 p-10'>
+            <div className="card w-96 bg-base-100 shadow-xl image-full">
+                <figure><img src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Image" /></figure>
+                <div className="card-body">
+                    <h2 className="card-title">Image Name:</h2>
+                    <p>Date:</p>
+                    <div className="card-actions justify-end">
+                        <button className="btn btn-primary">Download!</button>
+                    </div>
+                </div>
             </div>
+            </section>
 
         </Layout>
     )
