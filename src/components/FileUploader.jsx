@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import useStorage from '../firebase/useStorage';
 
-function FileUploader() {
+function FileUploader({contentType}) {
     const [selectedFile, setSelectedFile] = useState(null);
-    const { startUpload, progress } = useStorage();
-    console.log(selectedFile)
+    const { startUpload, progress } = useStorage(contentType);
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
@@ -15,15 +14,14 @@ function FileUploader() {
         e.preventDefault();
 
         if (selectedFile) {
-            startUpload(selectedFile);
-            console.log('starting ulpoad')
+            startUpload(selectedFile, contentType);
         }
         setSelectedFile(null)
     }
 
     return (
         <div className='text-center mt-10'>
-            <form className='flex items-center flex-col gap-8' onSubmit={handleSubmit}>
+            <form className='flex items-center justify-center gap-8' onSubmit={handleSubmit}>
                 <input type="file"
                     onChange={handleFileChange}
                     className="file-input file-input-bordered w-full max-w-xs" />
