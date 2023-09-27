@@ -8,6 +8,8 @@ import BusinessCard from './components/Editable-Templates/BusinessCard';
 import LogoPage from './pages/Media/LogoPage';
 import ImagePage from './pages/Media/ImagePage';
 import VideoPage from './pages/Media/VideoPage';
+import ImageHome from './pages/Media/ImageHome';
+import Album from './components/Media-Collections/Album';
 
 
 function App() {
@@ -18,7 +20,14 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/media-collection' element={<MediaCollections />} />
             <Route path='/media-collection/logos' element={<LogoPage />} />
-            <Route path='/media-collection/images' element={<ImagePage />} />
+
+            <Route path='/media-collection/images' element={<ImagePage albums={albums}/>}
+            //means that when the path matches '/media-collection/images', it will render the ImageHome component and pass the albums prop to it.
+            render={() => <ImageHome albums={albums}/>} />
+            {/* this route will match any path that follows the pattern '/something', where 'something' is the value of the :album parameter. 
+            when a route matches the pattern, it will render the Album component.*/}
+            <Route path='/:album' element={<Album />} /> 
+                    
             <Route path='/media-collection/videos' element={<VideoPage />} />
 
           <Route path='/editable-templates' element={<EditableTemplates />} />
