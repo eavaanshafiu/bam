@@ -5,7 +5,6 @@ import useFirestore from '../../firebase/useFirestore';
 
 function ImagePage() {
     const { docs: images, isLoading } = useFirestore('images');
-    console.log(images)
 
     if (isLoading) {
         return (
@@ -14,6 +13,7 @@ function ImagePage() {
             </div>
         )
     }
+    console.log(images)
 
     return (
         <Layout>
@@ -22,9 +22,9 @@ function ImagePage() {
             <section className='flex justify-center'>
                 <div className='grid lg:grid-cols-4 gap-10 my-10 sm:grid-cols-1 md:grid-cols-3  '>
                     {images.map((image) =>
-                        <div key={image.imageUrl||image.fileUrl} className="card card-compact sm:w-[30vw] md:w-[20vw] lg:w-[15vw] bg-base-100 shadow-xl">
+                        <div key={image.fileUrl} className="card card-compact sm:w-[30vw] md:w-[20vw] lg:w-[15vw] bg-base-100 shadow-xl">
                             <figure className='max-h-[15rem]'>
-                                <img src={image.imageUrl} alt="Image" />
+                                <img src={image.fileUrl} alt="Image" />
                             </figure>
 
                             <div className="card-body">
