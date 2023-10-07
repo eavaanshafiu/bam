@@ -2,28 +2,23 @@ import React, { useState } from 'react'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import { collection, addDoc } from "firebase/firestore";
 import { storage, db } from './config';
-import { v4 as uuidv4 } from 'uuid';
+import { useParams } from 'react-router-dom';
 
-function useStorage(contentType) {
+function useStorage() {
     const [progress, setProgress] = useState(0);
     const [error, setError] = useState(null);
+    const {album} = useParams();
+    const currentAlbum = album;
+    console.log("current album is ", currentAlbum)
 
-    const startUpload = (file) => {
-        if (!file) {
+
+    const startUpload = async (file, currentAlbum) => {
+        if (!file || !currentAlbum) {
             return
         }
 
-        const fileId = uuidv4();
-        const formatFile = file.type.split('/')[1];
-        let storagePath;
-
-        if (contentType === 'image') {
-            storagePath = `images/${fileId}.${contentType}`;
-        } else if (contentType === 'video') {
-            storagePath = `videos/${fileId}.${contentType}`;
-        } else if (contentType === 'logo') {
-            storagePath = `logos/${fileId}.${contentType}`;
-        }
+        const fileId = file.name;
+        const storagePath = `images/albums/${currentAlbum}/${file.name}` //because these albums are for the images page.
 
         const storageRef = ref(storage, storagePath);
         const uploadTask = uploadBytesResumable(storageRef, file);
@@ -36,23 +31,18 @@ function useStorage(contentType) {
             setError(error)
         }, async () => {
             const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            setProgress(progress)
+            
 
-            // Determine the appropriate collection based on the file type
-            let collectionRef;
-            if (contentType === 'image') {
-                collectionRef = collection(db, "images");
-            } else if (contentType === 'video') {
-                collectionRef = collection(db, "videos");
-            } else if (contentType === 'logo') {
-                collectionRef = collection(db, "logos");
-            }
+            const albumRef = collection(db, `images/albums/${currentAlbum}`)
 
-            // Store data into the appropriate collection
-            await addDoc(collectionRef, {
+            // Store data into the current album collection in the firestore database
+            await addDoc(albumRef, {
+                file: file,
                 fileUrl: downloadURL,
                 addedOn: new Date(),
             });
+
+            setProgress(progress)
         });
     }
 

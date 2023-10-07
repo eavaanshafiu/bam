@@ -1,20 +1,23 @@
 import React, { useState } from 'react'
 import useStorage from '../firebase/useStorage';
 
-function FileUploader({contentType}) {
+function FileUploader({currentAlbum}) {
     const [selectedFile, setSelectedFile] = useState(null);
-    const { startUpload, progress } = useStorage(contentType);
-
+    const { startUpload, progress } = useStorage();
+    
+    //selecting file to upload
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
             setSelectedFile(e.target.files[0])
         }
     }
+
+    //start upload when submit
     function handleSubmit(e) {
         e.preventDefault();
 
         if (selectedFile) {
-            startUpload(selectedFile, contentType);
+            startUpload(selectedFile, currentAlbum);
         }
         setSelectedFile(null)
     }

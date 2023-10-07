@@ -19,28 +19,22 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/media-collection' element={<MediaCollections />} />
-            <Route path='/media-collection/logos' element={<LogoPage />} />
+            <Route path='/logos' element={<LogoPage />} />
 
-            <Route path='/media-collection/images' element={<ImagePage albums={albums}/>}
-            //means that when the path matches '/media-collection/images', it will render the ImageHome component and pass the albums prop to it.
-            render={() => <ImageHome albums={albums}/>} />
+            <Route path='/images' element={<ImagePage/>}/>
+            
             {/* this route will match any path that follows the pattern '/something', where 'something' is the value of the :album parameter. 
             when a route matches the pattern, it will render the Album component.*/}
-            <Route path='/:album' element={<Album />} /> 
+            <Route path=':album/*' element={<Album />} /> 
                     
-            <Route path='/media-collection/videos' element={<VideoPage />} />
+            <Route path='/videos' element={<VideoPage />} />
 
           <Route path='/editable-templates' element={<EditableTemplates />} />
             <Route path='/editable-templates/business-cards' element={<BusinessCard />} />
 
           <Route path='/Steps/social-media' element={<SocialMedia />} />
-
-
         </Routes>
       </Router>
-
-      {/* <Social /> */}
-
     </>
 
   );

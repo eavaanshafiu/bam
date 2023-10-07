@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { query, onSnapshot, collection, orderBy } from "firebase/firestore";
 import { db } from './config';
-
 
 function useFirestore(collectionName) {
     const [docs, setDocs] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        //function to get data 
         const getData = async () => {
             try {
                 const q = query(collection(db, collectionName), orderBy('addedOn', 'desc'));
