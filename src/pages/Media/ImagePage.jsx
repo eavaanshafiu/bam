@@ -2,11 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase/config';
 import { collection, onSnapshot, setDoc, doc } from 'firebase/firestore';
 import Layout from '../../Layout.';
-import { Link } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function ImagePage() {
     const [albums, setAlbums] = useState([]);
     const [albumName, setAlbumName] = useState();
+    const {album} = useParams()
+    const albumType = 'images';
+    console.log('page val: ', albumType)
+
+
 
     const handleCreateAlbum = async () => {
         if (!albumName) {
@@ -14,7 +20,7 @@ function ImagePage() {
         }
         try {
             //getting a reference to the albums collection
-            const albumsRef = collection(db, "albums")
+            const albumsRef = collection(db, `${albumType}`)
             await setDoc(doc(albumsRef, albumName), {
                 name: albumName,
             });
@@ -32,7 +38,7 @@ function ImagePage() {
     }
 
     useEffect(() => {
-        const albumsCollection = collection(db, 'albums')
+        const albumsCollection = collection(db, `${albumType}`)
 
         const unsubscribe = onSnapshot(albumsCollection, (snapshot) => {
             const tempAlbums = [];
@@ -46,9 +52,14 @@ function ImagePage() {
 
     }, [])
 
+    const navigate = useNavigate();
+    const navigateToAlbum = (album) => {
+        navigate(`/${albumType}/${encodeURIComponent(album.name)}`, { state: albumType})
+    }
+
     return (
         <Layout>
-            <form className='flex items-center justify-center gap-8'>
+            <form className='flex items-center justify-center gap-8 m-8'>
                 <input type="text"
                     onChange={onAlbumNameChange}
                     className="file-input file-input-bordered w-full max-w-xs" />
@@ -61,11 +72,11 @@ function ImagePage() {
                 </button>
             </form>
 
-            <section>
+            <section className='mx-8'>
                 {albums.map(album => (
                     <aside className='my-10' >
-                        <Link to={`/${encodeURIComponent(album.name)}/*`}>
-                            <div key={album.name} className="card w-96 bg-base-100 shadow-xl">
+                        <span className='cursor-pointer' onClick={() => navigateToAlbum(album)}>
+                            <div key={album.name} className="card w-72 bg-base-100 shadow-xl">
                                 <figure><img src={album.image} alt="Shoes" /></figure>
                                 <div className="card-body">
                                     <h2 className="card-title">
@@ -73,7 +84,7 @@ function ImagePage() {
                                     </h2>
                                 </div>
                             </div>
-                        </Link>
+                        </span>
                     </aside>
                 ))}
             </section>

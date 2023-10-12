@@ -16,9 +16,9 @@ const Sidebar = () => {
 
             <ul className='flex flex-col gap-10'>
                 <li className='font-semibold text-stone-dark'>
-                    <Link to='/media-collection' className='hover:bg-stone-bold hover:text-stone-highlight rounded cursor-pointer py-1 px-2'>Media Collections</Link>
+                    <span className='rounded py-1 px-2'>Media Collections</span>
                     <ul className='ml-4'>
-                        <Link to='/logos'><li className='cursor-pointer py-1 pl-3 rounded text-stone hover:bg-stone-bold hover:text-stone-highlight'>Logos</li></Link>
+                        <Link to='/logos' ><li className='cursor-pointer py-1 pl-3 rounded text-stone hover:bg-stone-bold hover:text-stone-highlight'>Logos</li></Link>
                         <Link to='/images'><li className='cursor-pointer py-1 pl-3 rounded text-stone hover:bg-stone-bold hover:text-stone-highlight'>Images</li></Link>
                         <Link to='/videos'><li className='cursor-pointer py-1 pl-3 rounded text-stone hover:bg-stone-bold hover:text-stone-highlight'>Videos</li></Link>
                     </ul>
