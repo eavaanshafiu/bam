@@ -65,7 +65,7 @@ function Album() {
         }
     }
 
-    var download = function(url, filename, callback){
+    var download = function(url, filename){
         FileSaver.saveAs(url, filename);
       };
 
@@ -97,9 +97,7 @@ function Album() {
                                         {media.name}
                                     </h2>
                                     <p className='cursor-pointer' onClick={() => {
-                                        download(media.url, media.name, () => {
-                                        console.log('done')
-                                    })
+                                        download(media.url, media.name)
                                     }}>delete</p>
                                 </div>
                             </div>
