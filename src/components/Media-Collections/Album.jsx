@@ -4,10 +4,10 @@ import { useParams, useLocation } from 'react-router-dom';
 import { db, storage } from '../../firebase/config';
 import { getDownloadURL, uploadBytes, ref } from 'firebase/storage';
 import { onSnapshot, doc, updateDoc } from 'firebase/firestore';
+import FileSaver from 'file-saver';
 
 function Album() {
     console.log('album component is rendered')
-
     const [medias, setMedias] = useState([])
     const { album } = useParams();
     const fileRef = useRef()
@@ -65,6 +65,10 @@ function Album() {
         }
     }
 
+    var download = function(url, filename, callback){
+        FileSaver.saveAs(url, filename);
+      };
+
 
     return (
         <Layout>
@@ -86,11 +90,17 @@ function Album() {
                     {medias.map((media, index) => (
                         <aside className='m-10 grid' key={index} >
                             <div  className="card w-72 bg-base-100 shadow-xl">
+
                                 <figure><img src={media.url} alt="Shoes" /></figure>
                                 <div className="card-body">
                                     <h2 className="card-title">
                                         {media.name}
                                     </h2>
+                                    <p className='cursor-pointer' onClick={() => {
+                                        download(media.url, media.name, () => {
+                                        console.log('done')
+                                    })
+                                    }}>delete</p>
                                 </div>
                             </div>
                         </aside>
